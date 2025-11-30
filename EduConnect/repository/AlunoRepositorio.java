@@ -1,20 +1,23 @@
 package repository;
 
-import model.Aluno;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import model.Aluno;
+
 public class AlunoRepositorio {
     private List<Aluno> alunos = new ArrayList<>();
+    private long proximoId = 1;
 
     public Aluno salvar(Aluno aluno) {
+        aluno.setId(proximoId++);
         alunos.add(aluno);
         return aluno;
     }
 
-    public void remove(Aluno aluno){
-        alunos.remove(aluno);
+    public Optional<Aluno> buscarPorId(long id) {
+        return alunos.stream().filter(a -> a.getId() == id).findFirst();
     }
 
     public List<Aluno> buscarTodos() {

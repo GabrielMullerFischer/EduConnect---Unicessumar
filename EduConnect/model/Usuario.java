@@ -1,6 +1,7 @@
 package model;
 
 public abstract class Usuario implements Relatorio{
+    protected long id;
     protected String nome;
     protected String login;
     protected String senha;
@@ -13,6 +14,14 @@ public abstract class Usuario implements Relatorio{
 
     public boolean autenticar(String login, String senha) {
         return this.login.equals(login) && this.senha.equals(senha);
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getNome() {

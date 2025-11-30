@@ -18,6 +18,7 @@ public class Professor extends Usuario implements Autenticacao{
     @Override
     public void gerarRelatorio() {
         System.out.println("\n - Relatorio do Professor - ");
+        System.out.println("ID: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Especialidade: " + especialidade);
         System.out.println("Registro: " + registro);

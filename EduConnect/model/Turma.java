@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Turma {
+    private long id;
     private String codigo;
     private Curso curso;
     private Professor professor;
@@ -32,12 +33,25 @@ public class Turma {
 
     public void mostrarResumo() {
         System.out.println("\nResumo da Turma: " + this.codigo);
+        System.out.println("ID: " + this.id);
         System.out.println("Curso: " + this.curso.getNome());
         System.out.println("Professor: " + this.professor.getNome());
         System.out.println("Quantidade de Alunos: " + this.alunos.size());
         System.out.println("Alunos:");
         for(Aluno aluno : alunos){
             System.out.println("Nome: " + aluno.getNome() + " - Matricula: " +  aluno.getMatricula());
+        }
+    }
+
+    public void gerarRelatorio() {
+        System.out.println("\n\n - Relatorio do Professor - ");
+        System.out.println("ID: " + this.id);
+        System.out.println("Codigo: " + this.codigo);
+        System.out.println("Curso: " + this.curso.getNome());
+        System.out.println("Professor: " + this.professor.getNome());
+        System.out.println("Quantidade de Alunos: " + this.alunos.size());
+        for (Aluno aluno : this.alunos) {
+            System.out.println("\t - " + aluno.getNome() + " - Matricula: " + aluno.getMatricula());
         }
     }
 
@@ -59,6 +73,14 @@ public class Turma {
                 System.out.println(" - " + av);
             }
         }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCodigo() {

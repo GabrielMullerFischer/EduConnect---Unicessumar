@@ -26,6 +26,7 @@ public class Aluno extends Usuario implements Autenticacao{
     @Override
     public void gerarRelatorio() {
         System.out.println("\n - Relatorio do Aluno - ");
+        System.out.println("ID: " + id);
         System.out.println("Nome: " + nome);
         System.out.println("Matricula: " + matricula);
         System.out.println("Curso: " + curso.getNome());

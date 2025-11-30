@@ -1,6 +1,7 @@
 package model;
 
 public class Curso implements Relatorio{
+    private long id;
     private String nome;
     private String codigo;
     private int cargaHoraria;
@@ -23,6 +24,14 @@ public class Curso implements Relatorio{
         System.out.println("Nome: " + nome);
         System.out.println("Codigo: " + codigo);
         System.out.println("Carga Horaria: " + cargaHoraria + " horas");
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getNome() {

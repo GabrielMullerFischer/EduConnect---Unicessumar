@@ -7,8 +7,10 @@ import java.util.Optional;
 
 public class ProfessorRepositorio {
     private List<Professor> professores = new ArrayList<>();
+    private long proximoId = 1;
 
     public Professor salvar(Professor professor) {
+        professor.setId(proximoId++);
         professores.add(professor);
         return professor;
     }
