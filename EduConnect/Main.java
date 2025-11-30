@@ -58,7 +58,7 @@ public class Main {
         Administrador administrador = new Administrador("ADMIN", "admin", "admin", "Computacao");
         
         alunoRepositorio.salvar(aluno);
-        alunoRepositorio.salvar(aluno2);        
+        alunoRepositorio.salvar(aluno2);
         alunoRepositorio.salvar(aluno3);
         alunoRepositorio.salvar(aluno4);
         professorRepositorio.salvar(professor);

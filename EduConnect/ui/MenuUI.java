@@ -180,7 +180,8 @@ public class MenuUI {
         System.out.println("\n - Menu do Professor - ");
         System.out.println("1. Matricular Aluno em Turma");
         System.out.println("2. Ver Resumo de Turma");
-        System.out.println("3. Ver Relatório de Cursos");        
+        System.out.println("3. Ver Relatório de Cursos");
+        System.out.println("4. Adicionar nota a aluno");
         System.out.println("9. Logout");
         System.out.print("Escolha: ");
 
@@ -189,12 +190,38 @@ public class MenuUI {
             switch (opcao) {
                 case 1: matricularAlunoEmTurma(); break;
                 case 2: verResumoTurma(); break;
-                case 3: relatorioService.gerarRelatorioCurso(); break;                
+                case 3: relatorioService.gerarRelatorioCurso(); break;
+                case 4: adicionarAvaliacaoAluno(); break;
                 case 9: fazerLogout(); break;
                 default: System.err.println("Opcao invalida.");
             }
         } catch (NumberFormatException e) {
             System.err.println("Entrada invalida.");
+        }
+    }
+
+    private void adicionarAvaliacaoAluno() {
+        System.out.println("\n - Adicionar Avaliacao ao Aluno - ");
+        try {
+            String matricula = lerTextoObrigatorio("Digite a matricula do aluno: ");
+            Aluno aluno = buscarPorMatricula(matricula);
+
+            String descricao = lerTextoObrigatorio("Descricao da avaliacao (ex: Prova 1): ");
+            double nota;
+            do {
+                nota = lerInteiro("Nota da avaliacao: ");
+                if (nota < 0 || nota > 10) {
+                    System.err.println("Erro: A nota deve ser entre 0 e 10.");
+                }
+            } while (nota < 0 || nota > 10);
+
+            Avaliacao novaAvaliacao = new Avaliacao(descricao);
+            novaAvaliacao.atribuirNota(nota);
+
+            aluno.addAvaliacao(novaAvaliacao);
+            System.out.println("Avaliacao adicionada com sucesso para o aluno " + aluno.getNome() + "!");
+        } catch (RuntimeException e) {
+            System.err.println("Erro: " + e.getMessage());
         }
     }
 
@@ -361,7 +388,7 @@ public class MenuUI {
         System.out.println("1. Relatorio de Alunos");
         System.out.println("2. Relatorio de Professores");
         System.out.println("3. Relatorio de Cursos");
-        System.out.println("4. Relatorio de Turmas");
+        System.out.println("4. Relatorio Geral");
         System.out.print("Escolha: ");
         int opcao = Integer.parseInt(scanner.nextLine());
 
@@ -381,5 +408,11 @@ public class MenuUI {
             default:
                 System.err.println("Opcao invalida.");
         }
+    }
+
+    private Aluno buscarPorMatricula(String matricula) {
+        return alunoRepositorio.buscarTodos().stream()
+                .filter(a -> a.getMatricula().equals(matricula))
+                .findFirst().orElseThrow(() -> new RuntimeException("Aluno com matricula " + matricula + " nao encontrado."));
     }
 }
